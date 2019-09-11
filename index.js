@@ -22,12 +22,12 @@ const axios = require('axios');
   * @returns {Promise} http request promise
   * @returns {Error} Format error message
   */
-const fetch = function (protocol, domain = 'google.com') {
+const fetch = function (protocol, domain) {
+  // Perform validation before http request to provide more accuracy
   try {
     protocol = protocolValidation(protocol)
-  } catch (error) {
-    return error  
-  }
+    domain = domainValidation(domain)
+  } catch (error) { return error }
 
   return axios.get(`${protocol}://${domain}`)
 }
@@ -39,11 +39,30 @@ const fetch = function (protocol, domain = 'google.com') {
  * @returns {Error} Format error message
  */
 const protocolValidation = function (protocol = '') {
-  const _proto = protocol.toLocaleLowerCase()
-  if (_proto === '') return 'https'
-  if ( _proto === 'http' || _proto === 'https')
-    return _proto
+  const _protocol = protocol.toLocaleLowerCase() // normalization
+  if (_protocol === '') return 'https'
+  if ( _protocol === 'http' || _protocol === 'https')
+    return _protocol
   else throw new Error('Wrong protocol')
 }
 
-module.exports = { fetch }
+/**
+ * Validate domain test case, to prevent weird behaviors
+ * @param {String} domain test case
+ * @returns {String} domain verified
+ * @returns {Error} validation error
+ */
+const domainValidation = function (domain = '') {
+  const _domain = domain.toLocaleLowerCase() // normalization
+  const domainRegExp = /(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/
+  if (!domainRegExp.test(_domain)) {
+    throw new Error('Wrong domain format')
+  }
+  return _domain
+}
+
+module.exports = { 
+  fetch,
+  protocolValidation,
+  domainValidation
+}

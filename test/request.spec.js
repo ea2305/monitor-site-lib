@@ -22,7 +22,7 @@ describe('Test [Lib]', function() {
     /**
      * Validate domain input
      */
-    it('Case 1: Domain validation', async function () {
+    it('Case 2: Domain validation', async function () {
       const mistake = 'español,com'    // Lib only process http and https
       let response = await fetch(testCase.protocol, mistake);
       assert.equal(response.message, 'Wrong domain format')
@@ -31,7 +31,7 @@ describe('Test [Lib]', function() {
     /**
      * Request test, get information and anaylze status
      */
-    it('Case 2: Return info about website', async function() {
+    it('Case 3: Return info about website', async function() {
       let response = await fetch(testCase.protocol, testCase.domain);
 
       // data test
