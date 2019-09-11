@@ -14,9 +14,18 @@ describe('Test [Lib]', function() {
      * Validate protocol input
      */
     it('Case 1: Protocol validation', async function () {
-      const badProtocol = 'hqqt'    // Lib only process http and https
-      let response = await fetch(badProtocol, testCase.domain);
+      const mistake = 'hqqt'    // Lib only process http and https
+      let response = await fetch(mistake, testCase.domain);
       assert.equal(response.message, 'Wrong protocol')
+    })
+
+    /**
+     * Validate domain input
+     */
+    it('Case 1: Domain validation', async function () {
+      const mistake = 'español,com'    // Lib only process http and https
+      let response = await fetch(testCase.protocol, mistake);
+      assert.equal(response.message, 'Wrong domain format')
     })
 
     /**

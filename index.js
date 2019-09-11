@@ -1,6 +1,6 @@
 /**
  * Site Report
- * Genereta simple web page report with (Domain, Server and HTTPS Certificate status)
+ * Generate simple web page report with (Domain, Server and HTTPS Certificate status)
  * @author Elihu A. Cruz
  * @version 1.0.0
  */
@@ -19,6 +19,8 @@ const axios = require('axios');
   * white this information We perform the following operations
   * @param {String} protocol https or https protocol
   * @param {String} domain client domain
+  * @returns {Promise} http request promise
+  * @returns {Error} Format error message
   */
 const fetch = function (protocol, domain = 'google.com') {
   try {
@@ -30,6 +32,12 @@ const fetch = function (protocol, domain = 'google.com') {
   return axios.get(`${protocol}://${domain}`)
 }
 
+/**
+ * Validation of HTTP and HTTPS protocols format to prevent errors
+ * @param {String} protocol Test case http protocol type
+ * @returns {String} parsed protocol
+ * @returns {Error} Format error message
+ */
 const protocolValidation = function (protocol = '') {
   const _proto = protocol.toLocaleLowerCase()
   if (_proto === '') return 'https'
