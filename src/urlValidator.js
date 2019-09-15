@@ -1,36 +1,8 @@
 /**
- * Site Report
- * Generate simple web page report with (Domain, Server and HTTPS Certificate status)
+ * Validate request URL
  * @author Elihu A. Cruz
  * @version 1.0.0
  */
-
-const axios = require('axios');
-
-/**
- * 1.- Generate HTTP request
- * 2.- Server status [Boolean]
- * 3.- Domain expiration [Date]
- * 4.- HTTPs (SSL,TLS) [Date]
- */
-
- /**
-  * Implement http request to provide all basic information about domain
-  * white this information We perform the following operations
-  * @param {String} protocol https or https protocol
-  * @param {String} domain client domain
-  * @returns {Promise} http request promise
-  * @returns {Error} Format error message
-  */
-const fetch = function (protocol, domain) {
-  // Perform validation before http request to provide more accuracy
-  try {
-    protocol = protocolValidation(protocol)
-    domain = domainValidation(domain)
-  } catch (error) { return error }
-
-  return axios.get(`${protocol}://${domain}`)
-}
 
 /**
  * Validation of HTTP and HTTPS protocols format to prevent errors
@@ -62,7 +34,6 @@ const domainValidation = function (domain = '') {
 }
 
 module.exports = { 
-  fetch,
   protocolValidation,
   domainValidation
 }

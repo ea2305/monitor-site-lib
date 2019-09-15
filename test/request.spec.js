@@ -5,7 +5,7 @@ const _DEBUG = process.env.NODE_ENV | true
 const { testCase } = require('./testsuit/domain')
 
 // Lib
-const { fetch } = require('../index')
+const { fetch } = require('../src/request')
 
 describe('Test [Lib]', function() {
   describe('Request information', function() {
@@ -32,6 +32,7 @@ describe('Test [Lib]', function() {
      * Request test, get information and anaylze status
      */
     it('Case 3: Return info about website', async function() {
+      this.timeout(15 * 1000);
       let response = await fetch(testCase.protocol, testCase.domain);
 
       // data test
