@@ -27,6 +27,4 @@ const fetch = function (protocol, domain) {
   return axios.get(`${protocol}://${domain}`)
 }
 
-module.exports = { 
-  fetch
-}
+module.exports = { fetch }

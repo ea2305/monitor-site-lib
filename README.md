@@ -17,6 +17,6 @@ npm run test
 
 **Elihu A. Cruz**
 
-### License
+### Licenses
 
 * MIT
